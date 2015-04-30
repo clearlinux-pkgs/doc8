@@ -1,0 +1,11 @@
+--- doc8-0.6.0/test-requirements.txt~	2015-04-17 21:14:27.000000000 -0400
++++ doc8-0.6.0/test-requirements.txt	2015-05-31 16:53:11.651042694 -0400
+@@ -3,7 +3,7 @@
+ # process, which may cause wedges in the gate later.
+ 
+ doc8
+-hacking>=0.9.2,<0.10
++hacking
+ nose
+ oslosphinx
+ sphinx>=1.1.2,!=1.2.0,<1.3
