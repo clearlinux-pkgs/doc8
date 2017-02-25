@@ -27,3 +27,5 @@ mccabe-python
 flake8-python
 pyflakes-python
 pep8
+Babel
+Sphinx
