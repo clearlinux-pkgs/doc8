@@ -4,7 +4,7 @@
 #
 Name     : doc8
 Version  : 0.7.0
-Release  : 17
+Release  : 18
 URL      : https://pypi.python.org/packages/source/d/doc8/doc8-0.7.0.tar.gz
 Source0  : https://pypi.python.org/packages/source/d/doc8/doc8-0.7.0.tar.gz
 Summary  : Style checker for Sphinx (or other) RST documentation
@@ -88,7 +88,7 @@ python components for the doc8 package.
 
 %build
 export LANG=C
-export SOURCE_DATE_EPOCH=1488046585
+export SOURCE_DATE_EPOCH=1488061651
 python2 setup.py build -b py2
 python3 setup.py build -b py3
 
@@ -98,7 +98,7 @@ export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 PYTHONPATH=%{buildroot}/usr/lib/python2.7/site-packages python2 setup.py test
 %install
-export SOURCE_DATE_EPOCH=1488046585
+export SOURCE_DATE_EPOCH=1488061651
 rm -rf %{buildroot}
 python2 -tt setup.py build -b py2 install --root=%{buildroot} --force
 python3 -tt setup.py build -b py3 install --root=%{buildroot} --force
