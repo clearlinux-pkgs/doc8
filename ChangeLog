@@ -1,6 +1,14 @@
 CHANGES
 =======
 
+0.8.0
+-----
+
+* Remove os.path.abspath() in ignore paths
+* Fix ignore_path_errors call in main
+* Add a -q option to be silent on success
+* Change py34 to py35
+
 0.7.0
 -----
 
