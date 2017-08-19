@@ -4,7 +4,7 @@
 #
 Name     : doc8
 Version  : 0.8.0
-Release  : 22
+Release  : 23
 URL      : http://pypi.debian.net/doc8/doc8-0.8.0.tar.gz
 Source0  : http://pypi.debian.net/doc8/doc8-0.8.0.tar.gz
 Summary  : Style checker for Sphinx (or other) RST documentation
@@ -24,6 +24,7 @@ BuildRequires : pip
 BuildRequires : python-dev
 BuildRequires : python3-dev
 BuildRequires : setuptools
+BuildRequires : typing-python
 Patch1: test.patch
 
 %description
@@ -61,12 +62,12 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C
-export SOURCE_DATE_EPOCH=1503075380
+export SOURCE_DATE_EPOCH=1503152982
 python2 setup.py build -b py2
 python3 setup.py build -b py3
 
 %install
-export SOURCE_DATE_EPOCH=1503075380
+export SOURCE_DATE_EPOCH=1503152982
 rm -rf %{buildroot}
 python2 -tt setup.py build -b py2 install --root=%{buildroot} --force
 python3 -tt setup.py build -b py3 install --root=%{buildroot} --force
