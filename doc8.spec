@@ -4,7 +4,7 @@
 #
 Name     : doc8
 Version  : 0.8.0
-Release  : 29
+Release  : 30
 URL      : http://pypi.debian.net/doc8/doc8-0.8.0.tar.gz
 Source0  : http://pypi.debian.net/doc8/doc8-0.8.0.tar.gz
 Summary  : Style checker for Sphinx (or other) RST documentation
