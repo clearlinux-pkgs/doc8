@@ -4,42 +4,40 @@
 #
 Name     : doc8
 Version  : 0.8.0
-Release  : 31
+Release  : 32
 URL      : http://pypi.debian.net/doc8/doc8-0.8.0.tar.gz
 Source0  : http://pypi.debian.net/doc8/doc8-0.8.0.tar.gz
 Summary  : Style checker for Sphinx (or other) RST documentation
 Group    : Development/Tools
 License  : Apache-2.0
-Requires: doc8-bin
-Requires: doc8-python3
-Requires: doc8-license
-Requires: doc8-python
+Requires: doc8-bin = %{version}-%{release}
+Requires: doc8-license = %{version}-%{release}
+Requires: doc8-python = %{version}-%{release}
+Requires: doc8-python3 = %{version}-%{release}
 Requires: chardet
 Requires: docutils
 Requires: restructuredtext_lint
 Requires: six
 Requires: stevedore
 BuildRequires : buildreq-distutils3
+BuildRequires : chardet
+BuildRequires : docutils
 BuildRequires : pbr
-BuildRequires : pip
-BuildRequires : python3-dev
-BuildRequires : setuptools
+BuildRequires : six
+BuildRequires : stevedore
 Patch1: test.patch
 
 %description
+====
 Doc8
-        ====
-        
-        Doc8 is an *opinionated* style checker for `rst`_ (with basic support for
-        plain text) styles of documentation.
-        
-        QuickStart
-        ==========
+====
+Doc8 is an *opinionated* style checker for `rst`_ (with basic support for
+plain text) styles of documentation.
 
 %package bin
 Summary: bin components for the doc8 package.
 Group: Binaries
-Requires: doc8-license
+Requires: doc8-license = %{version}-%{release}
 
 %description bin
 bin components for the doc8 package.
@@ -56,7 +54,7 @@ license components for the doc8 package.
 %package python
 Summary: python components for the doc8 package.
 Group: Default
-Requires: doc8-python3
+Requires: doc8-python3 = %{version}-%{release}
 
 %description python
 python components for the doc8 package.
@@ -66,6 +64,7 @@ python components for the doc8 package.
 Summary: python3 components for the doc8 package.
 Group: Default
 Requires: python3-core
+Provides: pypi(doc8)
 
 %description python3
 python3 components for the doc8 package.
@@ -73,21 +72,30 @@ python3 components for the doc8 package.
 
 %prep
 %setup -q -n doc8-0.8.0
+cd %{_builddir}/doc8-0.8.0
 %patch1 -p1
 
 %build
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
-export LANG=C
-export SOURCE_DATE_EPOCH=1532217798
-python3 setup.py build -b py3
+export LANG=C.UTF-8
+export SOURCE_DATE_EPOCH=1582919636
+# -Werror is for werrorists
+export GCC_IGNORE_WERROR=1
+export CFLAGS="$CFLAGS -fno-lto "
+export FCFLAGS="$CFLAGS -fno-lto "
+export FFLAGS="$CFLAGS -fno-lto "
+export CXXFLAGS="$CXXFLAGS -fno-lto "
+export MAKEFLAGS=%{?_smp_mflags}
+python3 setup.py build
 
 %install
+export MAKEFLAGS=%{?_smp_mflags}
 rm -rf %{buildroot}
-mkdir -p %{buildroot}/usr/share/doc/doc8
-cp LICENSE %{buildroot}/usr/share/doc/doc8/LICENSE
-python3 -tt setup.py build -b py3 install --root=%{buildroot}
+mkdir -p %{buildroot}/usr/share/package-licenses/doc8
+cp %{_builddir}/doc8-0.8.0/LICENSE %{buildroot}/usr/share/package-licenses/doc8/3d9ca858ae047e05c8c031e24b41aea21417fc2a
+python3 -tt setup.py build  install --root=%{buildroot}
 echo ----[ mark ]----
 cat %{buildroot}/usr/lib/python3*/site-packages/*/requires.txt || :
 echo ----[ mark ]----
@@ -100,8 +108,8 @@ echo ----[ mark ]----
 /usr/bin/doc8
 
 %files license
-%defattr(-,root,root,-)
-/usr/share/doc/doc8/LICENSE
+%defattr(0644,root,root,0755)
+/usr/share/package-licenses/doc8/3d9ca858ae047e05c8c031e24b41aea21417fc2a
 
 %files python
 %defattr(-,root,root,-)
